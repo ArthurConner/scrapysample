@@ -65,9 +65,17 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-ITEM_PIPELINES = {'life.pipelines.tidyup.TidyUp': 100 }
+ITEM_PIPELINES = {'life.pipelines.tidyup.TidyUp': 100, 'scrapyelasticsearch.scrapyelasticsearch.ElasticSearchPipeline': 500 }
 #}
 
+
+
+ELASTICSEARCH_SERVERS = ['localhost']
+ELASTICSEARCH_PORT = 9200 
+ELASTICSEARCH_INDEX = 'liferest'
+ELASTICSEARCH_TYPE = 'life'
+ELASTICSEARCH_UNIQ_KEY = 'url'
+	
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True
@@ -78,13 +86,13 @@ ITEM_PIPELINES = {'life.pipelines.tidyup.TidyUp': 100 }
 # The average number of requests Scrapy should be sending in parallel to
 # each remote server
 #AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
-# Enable showing throttling stats for every response received:
+# Enable showing throttling	 stats for every response received:
 #AUTOTHROTTLE_DEBUG = False
 
 # Enable and configure HTTP caching (disabled by default)
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
-#HTTPCACHE_ENABLED = True
+HTTPCACHE_ENABLED = True
 #HTTPCACHE_EXPIRATION_SECS = 0
-#HTTPCACHE_DIR = 'httpcache'
+HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'

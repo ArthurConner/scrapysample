@@ -65,7 +65,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-ITEM_PIPELINES = {'life.pipelines.tidyup.TidyUp': 100, 'scrapyelasticsearch.scrapyelasticsearch.ElasticSearchPipeline': 500 }
+ITEM_PIPELINES = {'life.pipelines.tidyup.TidyUp': 100, 'life.pipelines.mongo.Mongo': 300, 'scrapyelasticsearch.scrapyelasticsearch.ElasticSearchPipeline': 500 }
 #}
 
 
@@ -75,6 +75,13 @@ ELASTICSEARCH_PORT = 9200
 ELASTICSEARCH_INDEX = 'liferest'
 ELASTICSEARCH_TYPE = 'life'
 ELASTICSEARCH_UNIQ_KEY = 'url'
+
+
+MONGODB_SERVER = "localhost"
+MONGODB_PORT = 27017
+MONGODB_DB = "lifemotion"
+MONGODB_COLLECTION = "BlogPosts"
+
 	
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

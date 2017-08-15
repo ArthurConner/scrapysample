@@ -46,9 +46,10 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
-#    'life.middlewares.LifeSpiderMiddleware': 543,
-#}
+SPIDER_MIDDLEWARES = { 'scrapylib.deltafetch.DeltaFetch': 100,}
+DELTAFETCH_ENABLED = True
+DOTSCRAPY_ENABLED = True
+
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
@@ -65,10 +66,10 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-ITEM_PIPELINES = {'life.pipelines.tidyup.TidyUp': 100, 'life.pipelines.mongo.Mongo': 300, 'scrapyelasticsearch.scrapyelasticsearch.ElasticSearchPipeline': 500 }
+ITEM_PIPELINES = {'life.pipelines.tidyup.TidyUp': 100 , 'life.pipelines.mongo.Mongo': 300 }
 #}
 
-
+#, ,  'scrapyelasticsearch.scrapyelasticsearch.ElasticSearchPipeline': 500
 
 ELASTICSEARCH_SERVERS = ['localhost']
 ELASTICSEARCH_PORT = 9200 

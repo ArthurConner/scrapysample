@@ -104,6 +104,7 @@ PyDispatcher==2.0.5
 pydot2==1.0.33
 pyflakes==1.1.0
 Pygments==2.1.1
+pymongo==3.4.0
 Pympler==0.5
 pyOpenSSL==17.2.0
 pyparsing==2.0.3
@@ -144,6 +145,7 @@ toolz==0.7.4
 tornado==4.3
 traitlets==4.2.1
 Twisted==17.5.0
+txmongo==16.3.0
 unicodecsv==0.14.1
 urllib3==1.22
 voluptuous==0.8.9

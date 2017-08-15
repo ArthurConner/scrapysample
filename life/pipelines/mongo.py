@@ -1,15 +1,33 @@
 from datetime import datetime
-import pymongo
-from scrapy.conf import settings	
+import txmongo
+from scrapy.conf import settings
+from twisted.internet import defer, reactor
+from twisted.python import log
+
+
+def getConnection():
+	mongodb_uri = "mongodb://" +settings['MONGODB_SERVER'] + ":" + str(settings['MONGODB_PORT'])
+	print("getting connection..." + str(mongodb_uri))
+	mongo =   txmongo.MongoConnectionPool()
+	print("pool :" +str(mongo))
+	return mongo
+
+
+def getDatabase(conn, dbName):
+	print("getting database..." + dbName)
+	return getattr(conn, dbName)
+
+
+def getCollection(db, collName):
+	print("getting collection..." + collName)
+	return getattr(db, collName)
+
 
 class Mongo(object):
 	def __init__(self):
-		connection = pymongo.MongoClient(
-			settings['MONGODB_SERVER'],
-			settings['MONGODB_PORT']
-		)
-		db = connection[settings['MONGODB_DB']]
-		self.collection = db[settings['MONGODB_COLLECTION']]
+		con = getConnection()
+		foo = getDatabase(con,settings['MONGODB_DB'])
+		self.collection = getCollection(foo,settings['MONGODB_COLLECTION'])
 
 	def process_item(self, item, spider):
 		valid = True
@@ -18,6 +36,6 @@ class Mongo(object):
 				valid = False
 				raise DropItem("Missing {0}!".format(data))
 		if valid:
-			self.collection.insert(dict(item))
-			log.msg("Question added to MongoDB database!", level=log.DEBUG, spider=spider)
+			self.collection.insert(dict(item), safe=True)
+			print(" added to MongoDB database!")
 		return item
